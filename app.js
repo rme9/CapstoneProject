@@ -6,7 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
 
 var dynamoDBServ = require('./lib/DynamoDBService.js');
 
@@ -25,7 +24,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
 
 app.get('/getbuilding/:building', function(req, res) {
     var prom = dynamoDBServ.GetLocationByBuildingNum(req.params.building.toString());
@@ -42,10 +40,10 @@ app.get('/getroom/:room', function(req, res) {
 });
 
 app.get('/person/:id', function(req, res) {
-    var object = {
-        Error : "Not Implemented"
-    }
-    res.json(object);
+    var prom = dynamoDBServ.GetPersonById(req.params.id.toString());
+    prom.then(function(data){
+        res.json(data)}
+    );
 });
 
 app.post('/person', function(req, res) {
@@ -71,8 +69,6 @@ app.use(function(err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-
 
     // render the error page
     res.status(err.status || 500);
