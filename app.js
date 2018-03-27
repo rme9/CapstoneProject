@@ -55,7 +55,6 @@ app.get('/schedule/room/:id', function(req, res) {
     prom.then(function(data){
         res.json(data)}
     );
-    res.json(object);
 });
 
 // catch 404 and forward to error handler
