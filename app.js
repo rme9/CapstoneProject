@@ -57,6 +57,14 @@ app.get('/schedule/room/:id', function(req, res) {
     );
 });
 
+app.get('/schedule/person/:id', function(req, res) {
+    var prom = dynamoDBServ.GetScheduleByRoom(req.params.id.toString());
+    prom.then(function(data){
+        res.json(data)}
+    );
+});
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
