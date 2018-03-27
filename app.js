@@ -25,14 +25,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 
-app.get('/getbuilding/:building', function(req, res) {
+app.get('/building/:building', function(req, res) {
     var prom = dynamoDBServ.GetLocationByBuildingNum(req.params.building.toString());
     prom.then(function(data){
         res.json(data)}
     );
 });
 
-app.get('/getroom/:room', function(req, res) {
+app.get('/room/:room', function(req, res) {
     var prom = dynamoDBServ.GetLocationByRoomId(req.params);
     prom.then(function(data){
         res.json(data)}
