@@ -58,7 +58,7 @@ app.get('/schedule/room/:id', function(req, res) {
 });
 
 app.get('/schedule/person/:id', function(req, res) {
-    var prom = dynamoDBServ.GetScheduleByRoom(req.params.id.toString());
+    var prom = dynamoDBServ.GetScheduleByPerson(req.params.id.toString());
     prom.then(function(data){
         res.json(data)}
     );
