@@ -50,10 +50,11 @@ app.post('/person', function(req, res) {
     dynamoDBServ.CreateNewPerson(req.body);
 });
 
-app.get('/schedule/:id', function(req, res) {
-    var object = {
-        Error : "Not Implemented"
-    }
+app.get('/schedule/room/:id', function(req, res) {
+    var prom = dynamoDBServ.GetScheduleByRoom(req.params.id.toString());
+    prom.then(function(data){
+        res.json(data)}
+    );
     res.json(object);
 });
 
