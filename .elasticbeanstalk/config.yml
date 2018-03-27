@@ -1,10 +1,14 @@
 branch-defaults:
+  default:
+    environment: ScavengerRestService
   master:
-    environment: null
-    group_suffix: null
+    environment: node-express-env
+environment-defaults:
+  ScavengerRestService:
+    branch: null
+    repository: null
 global:
-  application_name: Scavenger
-  branch: null
+  application_name: Scavenger.Rest
   default_ec2_keyname: null
   default_platform: node.js
   default_region: us-east-1
@@ -13,6 +17,5 @@ global:
   platform_name: null
   platform_version: null
   profile: null
-  repository: null
   sc: git
   workspace_type: Application
