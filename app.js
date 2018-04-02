@@ -70,12 +70,10 @@ app.get('/metadata/:id', function(req, res){
 app.post('/person', function(req, res){
     var didInsert = dynamoDBServ.InsertPerson(req.body);
     if(didInsert) {
-        res.status = 200;
-        res.render();
+        res.json({"status" : "200"});
     }
     else {
-        res.status = 500;
-        res.render();
+        res.json({"status" : "500"});
     }
 });
 
