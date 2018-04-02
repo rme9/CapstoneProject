@@ -46,10 +46,6 @@ app.get('/person/:id', function(req, res) {
     );
 });
 
-app.post('/person', function(req, res) {
-    dynamoDBServ.CreateNewPerson(req.body);
-});
-
 app.get('/schedule/room/:id', function(req, res) {
     var prom = dynamoDBServ.GetScheduleByRoom(req.params.id.toString());
     prom.then(function(data){
@@ -62,6 +58,25 @@ app.get('/schedule/person/:id', function(req, res) {
     prom.then(function(data){
         res.json(data)}
     );
+});
+
+app.get('/metadata/:id', function(req, res){
+   var prom = dynamoDBServ.GetMetadata(req.params.id.toString());
+   prom.then(function(data){
+      res.json(data)
+   });
+});
+
+app.post('/person', function(req, res){
+    var didInsert = dynamoDBServ.InsertPerson(req.body);
+    if(didInsert) {
+        res.status = 200;
+        res.render();
+    }
+    else {
+        res.status = 500;
+        res.render();
+    }
 });
 
 
