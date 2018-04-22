@@ -51,10 +51,10 @@ public void create(String URL)
     //Checks that the array list of buildings is not empty
     if(buildList != null) {
         //Creates a list of strings to be displayed on the app list
-        final List<String> ListElementsArrayList = new ArrayList<String>(Arrays.asList(ListElements));
+        List<String> ListElementsArrayList = new ArrayList<String>(Arrays.asList(ListElements));
 
         //Creates an adapter to handle the action on the list
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (ListActivity.this, android.R.layout.simple_list_item_1, ListElementsArrayList);
 
         //sets the adapter for the list as adapter
