@@ -31,7 +31,7 @@ app.get('/building/:building', function(req, res) {
     var prom = dynamoDBServ.GetLocationByBuildingNum(req.params.building.toString());
     prom.then(function(data){
         console.log("Original Data: " + data[0].toString());
-        var d;
+        var d = [];
         data.forEach(function(item) {
             d.add(Converter.unmarshall(item));
         });
