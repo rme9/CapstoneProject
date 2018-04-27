@@ -33,7 +33,7 @@ app.get('/building/:building', function(req, res) {
         console.log("Original Data: " + data[0].toString());
         var d = [];
         data.forEach(function(item) {
-            d.add(Converter.unmarshall(item));
+            d.push(Converter.unmarshall(item));
         });
 
         console.log("Converted Data: " + d[0].toString());
