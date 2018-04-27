@@ -30,9 +30,8 @@ app.use('/', index);
 app.get('/building/:building', function(req, res) {
     var prom = dynamoDBServ.GetLocationByBuildingNum(req.params.building.toString());
     prom.then(function(data){
-        const d = event.Records.map(
-            Converter.unmarshall(data.dynamodb.NewImage)
-        );
+        const d = Converter.unmarshall(data);
+        console.log("Converted Data: " + d);
         res.json(d);
     });
 });
