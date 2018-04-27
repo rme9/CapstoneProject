@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var Converter = require("aws-sdk").DynamoDB.Converter;
+
 var index = require('./routes/index');
 
 var dynamoDBServ = require('./lib/DynamoDBService.js');
@@ -28,7 +30,8 @@ app.use('/', index);
 app.get('/building/:building', function(req, res) {
     var prom = dynamoDBServ.GetLocationByBuildingNum(req.params.building.toString());
     prom.then(function(data){
-        res.json(data)}
+        var d = Converter.unmarshall(data);
+        res.json(d)}
     );
 });
 
