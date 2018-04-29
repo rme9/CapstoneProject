@@ -30,22 +30,23 @@ app.use('/', index);
 app.get('/building/:building', function(req, res) {
     var prom = dynamoDBServ.GetLocationByBuildingNum(req.params.building.toString());
     prom.then(function(data){
-        console.log("Original Data: " + data[0].toString());
         var d = [];
         data.forEach(function(item) {
             d.push(Converter.unmarshall(item));
         });
-
-        console.log("Converted Data: " + d[0].toString());
         res.json(d ? d : {});
     });
 });
 
 app.get('/room/:room', function(req, res) {
     var prom = dynamoDBServ.GetLocationByRoomId(req.params);
-    prom.then(function(data){
-        res.json(data)}
-    );
+    prom.then(function(data) {
+        var d = [];
+        data.forEach(function (item) {
+            d.push(Converter.unmarshall(item));
+        });
+        res.json(d ? d : {});
+    });
 });
 
 app.get('/person/:id', function(req, res) {
@@ -58,21 +59,33 @@ app.get('/person/:id', function(req, res) {
 app.get('/schedule/room/:id', function(req, res) {
     var prom = dynamoDBServ.GetScheduleByRoom(req.params.id.toString());
     prom.then(function(data){
-        res.json(data)}
+        var d = [];
+        data.forEach(function(item) {
+            d.push(Converter.unmarshall(item));
+        });
+        res.json(d ? d : {});}
     );
 });
 
 app.get('/schedule/person/:id', function(req, res) {
     var prom = dynamoDBServ.GetScheduleByPerson(req.params.id.toString());
     prom.then(function(data){
-        res.json(data)}
+        var d = [];
+        data.forEach(function(item) {
+            d.push(Converter.unmarshall(item));
+        });
+        res.json(d ? d : {});}
     );
 });
 
 app.get('/metadata/:id', function(req, res){
    var prom = dynamoDBServ.GetMetadata(req.params.id.toString());
    prom.then(function(data){
-      res.json(data)
+       var d = [];
+       data.forEach(function(item) {
+           d.push(Converter.unmarshall(item));
+       });
+       res.json(d ? d : {});
    });
 });
 
