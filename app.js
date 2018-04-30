@@ -57,7 +57,7 @@ app.get('/person/id/:id', function(req, res) {
 });
 
 app.get('/person/name/:name', function(req, res) {
-    var prom = dynamoDBServ.GetPersonById(req.params.id.toString());
+    var prom = dynamoDBServ.GetPersonById(req.params.name.toString());
     prom.then(function(data){
         res.json(data)}
     );
