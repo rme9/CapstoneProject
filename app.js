@@ -49,7 +49,14 @@ app.get('/room/:room', function(req, res) {
     });
 });
 
-app.get('/person/:id', function(req, res) {
+app.get('/person/id/:id', function(req, res) {
+    var prom = dynamoDBServ.GetPersonById(req.params.id.toString());
+    prom.then(function(data){
+        res.json(data)}
+    );
+});
+
+app.get('/person/name/:name', function(req, res) {
     var prom = dynamoDBServ.GetPersonById(req.params.id.toString());
     prom.then(function(data){
         res.json(data)}
