@@ -51,16 +51,24 @@ app.get('/room/:room', function(req, res) {
 
 app.get('/person/id/:id', function(req, res) {
     var prom = dynamoDBServ.GetPersonById(req.params.id.toString());
-    prom.then(function(data){
-        res.json(data)}
-    );
+    prom.then(function(data) {
+        var d = [];
+        data.forEach(function (item) {
+            d.push(Converter.unmarshall(item));
+        });
+        res.json(d ? d : {});
+    });
 });
 
 app.get('/person/name/:name', function(req, res) {
     var prom = dynamoDBServ.GetPersonById(req.params.name.toString());
-    prom.then(function(data){
-        res.json(data)}
-    );
+    prom.then(function(data) {
+        var d = [];
+        data.forEach(function (item) {
+            d.push(Converter.unmarshall(item));
+        });
+        res.json(d ? d : {});
+    });
 });
 
 app.get('/schedule/room/:id', function(req, res) {
